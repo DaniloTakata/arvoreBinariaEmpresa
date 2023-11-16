@@ -1,109 +1,100 @@
 package codigoArvore;
 
-import java.util.Objects;
+import codigoArvore.classes.Gerente;
+
 
 public class No {
 
-    private Object elemento;
-    private int tipoElemento; // TP: 1 = Departamento; 2 = Gerente; 3 = Funcionario
-    private No pai;
-    private No esquerdo;
-    private No direito;
+    private int id = 0;
+    private int peso = 0;
+    private No noPai;
+    private No noEsquerdo;
+    private No noDireito;
+    private String nomeDep;
+    private Gerente gerente;
 
     public No() {}
 
-    public No(Object elemento, int tipoElemento, No pai, No esquerdo, No direito) {
-        this.elemento = elemento;
-        this.tipoElemento = tipoElemento;
-        this.pai = pai;
-        this.esquerdo = esquerdo;
-        this.direito = direito;
+    public No(int id) {
+        this.id = id;
+        this.peso++;
     }
 
-    public No(No novoNo) {
-        this.elemento = novoNo.getElemento();
-        this.tipoElemento = novoNo.getTipoElemento();
-        this.pai = novoNo.getPai();
-        this.esquerdo = novoNo.getEsquerdo();
-        this.direito = novoNo.getDireito();
+    public No(int id, int peso, No noPai, No noEsquerdo, No noDireito, String nomeDep, Gerente gerente) {
+        this.id = id;
+        this.peso++;
+        this.noPai = noPai;
+        this.noEsquerdo = noEsquerdo;
+        this.noDireito = noDireito;
+        this.nomeDep = nomeDep;
+        this.gerente = gerente;
+        this.id++;
     }
 
-    public No(Object elemento, int tipoElemento, No pai) {
-        this(elemento, tipoElemento, pai, null, null);
+    public int getPeso() {
+        return peso;
     }
 
-    public Object getElemento() {
-        return elemento;
+    public void setPeso(int peso) {
+        this.peso = peso;
     }
 
-    public void setElemento(Object elemento) {
-        this.elemento = elemento;
+    public int getId() {
+        return id;
     }
 
-    public int getTipoElemento() {
-        return tipoElemento;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setTipoElemento(int tipoElemento) {
-        this.tipoElemento = tipoElemento;
+    public No getNoPai() {
+        return noPai;
     }
 
-    public No getPai() {
-        return pai;
+    public void setNoPai(No noPai) {
+        this.noPai = noPai;
     }
 
-    public void setPai(No pai) {
-        this.pai = pai;
+    public No getNoEsquerdo() {
+        return noEsquerdo;
     }
 
-    public No getEsquerdo() {
-        return esquerdo;
+    public void setNoEsquerdo(No noEsquerdo) {
+        this.noEsquerdo = noEsquerdo;
     }
 
-    public void setEsquerdo(No esquerdo) {
-        this.esquerdo = esquerdo;
+    public No getNoDireito() {
+        return noDireito;
     }
 
-    public No getDireito() {
-        return direito;
+    public void setNoDireito(No noDireito) {
+        this.noDireito = noDireito;
     }
 
-    public void setDireito(No direito) {
-        this.direito = direito;
+    public String getNomeDep() {
+        return nomeDep;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        No no = (No) o;
-
-        if (tipoElemento != no.tipoElemento) return false;
-        if (!Objects.equals(elemento, no.elemento)) return false;
-        if (!Objects.equals(pai, no.pai)) return false;
-        if (!Objects.equals(esquerdo, no.esquerdo)) return false;
-        return Objects.equals(direito, no.direito);
+    public void setNomeDep(String nomeDep) {
+        this.nomeDep = nomeDep;
     }
 
-    @Override
-    public int hashCode() {
-        int result = elemento != null ? elemento.hashCode() : 0;
-        result = 31 * result + tipoElemento;
-        result = 31 * result + (pai != null ? pai.hashCode() : 0);
-        result = 31 * result + (esquerdo != null ? esquerdo.hashCode() : 0);
-        result = 31 * result + (direito != null ? direito.hashCode() : 0);
-        return result;
+    public Gerente getGerente() {
+        return gerente;
+    }
+
+    public void setGerente(Gerente gerente) {
+        this.gerente = gerente;
     }
 
     @Override
     public String toString() {
         return "No{" +
-                "elemento=" + elemento +
-                ", tipoElemento=" + tipoElemento +
-                ", pai=" + pai +
-                ", esquerdo=" + esquerdo +
-                ", direito=" + direito +
+                "noPai=" + noPai +
+                ", noEsquerdo=" + noEsquerdo +
+                ", noDireito=" + noDireito +
+                ", nomeDep='" + nomeDep + '\'' +
+                ", gerente=" + gerente +
                 '}';
     }
 }
