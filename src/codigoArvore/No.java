@@ -15,6 +15,8 @@ public class No {
 
     public No() {}
 
+    public No(No novoNo){}
+
     public No(int id) {
         this.id = id;
         this.peso++;

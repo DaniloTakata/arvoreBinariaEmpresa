@@ -6,9 +6,23 @@ package codigoArvore;
 
 public class Arvore {
 
-        No root;
+    private No root;
 
-        int height(No node) {
+    public Arvore() {}
+
+    public Arvore(No root) {
+        this.root = root;
+    }
+
+    public No getRoot() {
+        return root;
+    }
+
+    public void setRoot(No root) {
+        this.root = root;
+    }
+
+    int height(No node) {
             if (node == null) {
                 return 0;
             }
@@ -52,14 +66,14 @@ public class Arvore {
             return height(node.getNoEsquerdo()) - height(node.getNoDireito());
         }
 
-        No insert(No node, int key) {
+        public No insert(No node, No key) {
             if (node == null) {
                 return new No(key);
             }
 
-            if (key < node.getId()) {
+            if (key.getId() < node.getId()) {
                 node.setNoEsquerdo(insert(node.getNoEsquerdo(), key));
-            } else if (key > node.getId()) {
+            } else if (key.getId() > node.getId()) {
                 node.setNoDireito(insert(node.getNoDireito(), key));
             } else {
                 // Duplicatas não são permitidas (você pode ajustar isso conforme necessário)
@@ -71,23 +85,23 @@ public class Arvore {
             int balance = getBalance(node);
 
             // Rotação à direita
-            if (balance > 1 && key < node.getNoEsquerdo().getId()) {
+            if (balance > 1 && key.getId() < node.getNoEsquerdo().getId()) {
                 return rightRotate(node);
             }
 
             // Rotação à esquerda
-            if (balance < -1 && key > node.getNoDireito().getId()) {
+            if (balance < -1 && key.getId() > node.getNoDireito().getId()) {
                 return leftRotate(node);
             }
 
             // Rotação dupla à direita (esquerda-direita)
-            if (balance > 1 && key > node.getNoEsquerdo().getId()) {
+            if (balance > 1 && key.getId() > node.getNoEsquerdo().getId()) {
                 node.setNoEsquerdo(leftRotate(node.getNoEsquerdo()));
                 return rightRotate(node);
             }
 
             // Rotação dupla à esquerda (direita-esquerda)
-            if (balance < -1 && key < node.getNoDireito().getId()) {
+            if (balance < -1 && key.getId() < node.getNoDireito().getId()) {
                 node.setNoDireito(rightRotate(node.getNoDireito()));
                 return leftRotate(node);
             }
@@ -195,7 +209,7 @@ public class Arvore {
             return search(root.getNoDireito(), key);
         }
 
-        void searchById(int key) {
+        public void searchById(int key) {
             No result = search(root, key);
             if (result != null) {
                 System.out.println("Nó com ID " + key + " encontrado na árvore.");
