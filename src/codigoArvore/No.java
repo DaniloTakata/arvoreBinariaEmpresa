@@ -1,102 +1,51 @@
 package codigoArvore;
 
+import codigoArvore.classes.Departamento;
 import codigoArvore.classes.Gerente;
 
 
 public class No {
 
-    private int id = 0;
-    private int peso = 0;
-    private No noPai;
-    private No noEsquerdo;
-    private No noDireito;
-    private String nomeDep;
-    private Gerente gerente;
+    Departamento departamento;
+    No left, right;
+    int height;
+
+    public No(Departamento departamento) {
+        this.departamento = departamento;
+        this.height = 1;
+    }
 
     public No() {}
 
-    public No(No novoNo){}
-
-    public No(int id) {
-        this.id = id;
-        this.peso++;
+    public Departamento getDepartamento() {
+        return departamento;
     }
 
-    public No(int id, int peso, No noPai, No noEsquerdo, No noDireito, String nomeDep, Gerente gerente) {
-        this.id = id;
-        this.peso++;
-        this.noPai = noPai;
-        this.noEsquerdo = noEsquerdo;
-        this.noDireito = noDireito;
-        this.nomeDep = nomeDep;
-        this.gerente = gerente;
-        this.id++;
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
     }
 
-    public int getPeso() {
-        return peso;
+    public No getLeft() {
+        return left;
     }
 
-    public void setPeso(int peso) {
-        this.peso = peso;
+    public void setLeft(No left) {
+        this.left = left;
     }
 
-    public int getId() {
-        return id;
+    public No getRight() {
+        return right;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setRight(No right) {
+        this.right = right;
     }
 
-    public No getNoPai() {
-        return noPai;
+    public int getHeight() {
+        return height;
     }
 
-    public void setNoPai(No noPai) {
-        this.noPai = noPai;
-    }
-
-    public No getNoEsquerdo() {
-        return noEsquerdo;
-    }
-
-    public void setNoEsquerdo(No noEsquerdo) {
-        this.noEsquerdo = noEsquerdo;
-    }
-
-    public No getNoDireito() {
-        return noDireito;
-    }
-
-    public void setNoDireito(No noDireito) {
-        this.noDireito = noDireito;
-    }
-
-    public String getNomeDep() {
-        return nomeDep;
-    }
-
-    public void setNomeDep(String nomeDep) {
-        this.nomeDep = nomeDep;
-    }
-
-    public Gerente getGerente() {
-        return gerente;
-    }
-
-    public void setGerente(Gerente gerente) {
-        this.gerente = gerente;
-    }
-
-    @Override
-    public String toString() {
-        return "No{" +
-                "noPai=" + noPai +
-                ", noEsquerdo=" + noEsquerdo +
-                ", noDireito=" + noDireito +
-                ", nomeDep='" + nomeDep + '\'' +
-                ", gerente=" + gerente +
-                '}';
+    public void setHeight(int height) {
+        this.height = height;
     }
 }

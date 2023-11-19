@@ -1,17 +1,37 @@
 import codigoArvore.Arvore;
-import codigoArvore.No;
+
+import codigoArvore.classes.Departamento;
 
 public class Main {
     public static void main(String[] args) {
+        /*
+        * Todos os testes realizado foram implementados de uma maneira mais fixa e direta;
+        * Intuito apenas de verificar o funcionamento das funções;
+        * */
 
-        Arvore arvore = new Arvore();
+        Arvore avlTree = new Arvore();
 
-        arvore.setRoot(arvore.insert(arvore.getRoot(), new No(10)));
-        arvore.setRoot(arvore.insert(arvore.getRoot(), new No(20)));
+        avlTree.insert(1, "RH");
+        avlTree.insert(2, "TI");
+        avlTree.insert(3, "Vendas");
 
-        // Buscar por IDs específicos
-        arvore.searchById(7);
-        arvore.searchById(20);
+        int idBuscar = 2;
+        Departamento encontrado = avlTree.search(idBuscar);
+        if (encontrado != null) {
+            System.out.println("Departamento encontrado: " + encontrado.getNome());
+        } else {
+            System.out.println("Departamento não encontrado.");
+        }
+
+        int idAtualizar = 2;
+        String novoNome = "Tecnologia da Informação";
+        avlTree.update(idAtualizar, novoNome);
+
+        int idExcluir = 1;
+        avlTree.delete(idExcluir);
+
+        System.out.println("Árvore AVL:");
+        avlTree.printTree();
 
     }
 }

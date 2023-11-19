@@ -1,222 +1,255 @@
 package codigoArvore;
 
-/*
- * ADM -> DEPARTAMENTOS -> GERENTES -> FUNCIONARIOS
- * */
+import codigoArvore.classes.Departamento;
 
 public class Arvore {
 
     private No root;
 
-    public Arvore() {}
+    // Métodos CRUD baseados no ID
 
-    public Arvore(No root) {
-        this.root = root;
+    // Método para inserir um nó com base no ID
+    public void insert(int id, String nome) {
+        root = insert(root, new Departamento(id, nome));
     }
 
-    public No getRoot() {
-        return root;
-    }
-
-    public void setRoot(No root) {
-        this.root = root;
-    }
-
-    int height(No node) {
-            if (node == null) {
-                return 0;
-            }
-            return node.getPeso();
+    private No insert(No No, Departamento departamento) {
+        if (No == null) {
+            return new No(departamento);
         }
 
-        int max(int a, int b) {
-            return (a > b) ? a : b;
+        if (departamento.getId() < No.departamento.getId()) {
+            No.left = insert(No.left, departamento);
+        } else if (departamento.getId() > No.departamento.getId()) {
+            No.right = insert(No.right, departamento);
+        } else {
+            // ID já existe, pode ser tratado conforme necessário
+            return No;
         }
 
-        No rightRotate(No y) {
-            No x = y.getNoEsquerdo();
-            No T2 = x.getNoDireito();
+        // Atualizar altura do nó pai
+        No.height = 1 + Math.max(height(No.left), height(No.right));
 
-            x.setNoDireito(y);
-            y.setNoEsquerdo(T2);
+        // Verificar o fator de balanceamento e realizar rotações, se necessário
+        int balance = getBalance(No);
 
-            y.setPeso(max(height(y.getNoEsquerdo()), height(y.getNoDireito())) + 1);
-            x.setPeso(max(height(x.getNoEsquerdo()), height(x.getNoDireito())) + 1);
-
-            return x;
-        }
-
-        No leftRotate(No x) {
-            No y = x.getNoDireito();
-            No T2 = y.getNoEsquerdo();
-
-            y.setNoEsquerdo(x);
-            x.setNoDireito(T2);
-
-            x.setPeso(max(height(x.getNoEsquerdo()), height(x.getNoDireito())) + 1);
-            y.setPeso(max(height(y.getNoEsquerdo()), height(y.getNoDireito())) + 1);
-
-            return y;
-        }
-
-        int getBalance(No node) {
-            if (node == null) {
-                return 0;
-            }
-            return height(node.getNoEsquerdo()) - height(node.getNoDireito());
-        }
-
-        public No insert(No node, No key) {
-            if (node == null) {
-                return new No(key);
-            }
-
-            if (key.getId() < node.getId()) {
-                node.setNoEsquerdo(insert(node.getNoEsquerdo(), key));
-            } else if (key.getId() > node.getId()) {
-                node.setNoDireito(insert(node.getNoDireito(), key));
+        // Casos de rotação
+        if (balance > 1) {
+            if (departamento.getId() < No.left.departamento.getId()) {
+                return rotateRight(No);
             } else {
-                // Duplicatas não são permitidas (você pode ajustar isso conforme necessário)
-                return node;
+                No.left = rotateLeft(No.left);
+                return rotateRight(No);
             }
-
-            node.setPeso(1 + max(height(node.getNoEsquerdo()), height(node.getNoDireito())));
-
-            int balance = getBalance(node);
-
-            // Rotação à direita
-            if (balance > 1 && key.getId() < node.getNoEsquerdo().getId()) {
-                return rightRotate(node);
-            }
-
-            // Rotação à esquerda
-            if (balance < -1 && key.getId() > node.getNoDireito().getId()) {
-                return leftRotate(node);
-            }
-
-            // Rotação dupla à direita (esquerda-direita)
-            if (balance > 1 && key.getId() > node.getNoEsquerdo().getId()) {
-                node.setNoEsquerdo(leftRotate(node.getNoEsquerdo()));
-                return rightRotate(node);
-            }
-
-            // Rotação dupla à esquerda (direita-esquerda)
-            if (balance < -1 && key.getId() < node.getNoDireito().getId()) {
-                node.setNoDireito(rightRotate(node.getNoDireito()));
-                return leftRotate(node);
-            }
-
-            return node;
         }
-
-        No minValueNode(No node) {
-            No current = node;
-
-            while (current.getNoEsquerdo() != null) {
-                current = current.getNoEsquerdo();
-            }
-
-            return current;
-        }
-
-        No delete(No root, int key) {
-            if (root == null) {
-                return root;
-            }
-
-            if (key < root.getId()) {
-                root.setNoEsquerdo(delete(root.getNoEsquerdo(), key));
-            } else if (key > root.getId()) {
-                root.setNoDireito(delete(root.getNoDireito(), key));
+        if (balance < -1) {
+            if (departamento.getId() > No.right.departamento.getId()) {
+                return rotateLeft(No);
             } else {
-                // Nó com apenas um filho ou sem filho
-                if ((root.getNoEsquerdo() == null) || (root.getNoDireito() == null)) {
-                    No temp = null;
-                    if (temp == root.getNoEsquerdo()) {
-                        temp = root.getNoDireito();
-                    } else {
-                        temp = root.getNoEsquerdo();
-                    }
+                No.right = rotateRight(No.right);
+                return rotateLeft(No);
+            }
+        }
 
-                    // Nenhum filho
-                    if (temp == null) {
-                        temp = root;
-                        root = null;
-                    } else {
-                        root = temp; // Copiar o conteúdo do nó não nulo
-                    }
-                } else {
-                    // Nó com dois filhos: obter o sucessor in-order (menor na subárvore direita)
-                    No temp = minValueNode(root.getNoDireito());
+        return No;
+    }
 
-                    // Copiar o valor do sucessor in-order para este nó
-                    root.setId(temp.getId());
+    // Método para buscar um nó com base no ID
+    public Departamento search(int id) {
+        No foundNo = search(root, id);
+        return (foundNo != null) ? foundNo.departamento : null;
+    }
 
-                    // Deletar o sucessor in-order
-                    root.setNoDireito(delete(root.getNoDireito(), temp.getId()));
+    private No search(No No, int id) {
+        if (No == null || No.departamento.getId() == id) {
+            return No;
+        }
+
+        if (id < No.departamento.getId()) {
+            return search(No.left, id);
+        }
+
+        return search(No.right, id);
+    }
+
+    // Método para atualizar um nó com base no ID
+    public void update(int id, String novoNome) {
+        root = update(root, id, novoNome);
+    }
+
+    private No update(No No, int id, String novoNome) {
+        // Implementação da lógica de atualização na árvore AVL baseada no ID
+        if (No == null) {
+            return null;
+        }
+
+        if (id < No.departamento.getId()) {
+            No.left = update(No.left, id, novoNome);
+        } else if (id > No.departamento.getId()) {
+            No.right = update(No.right, id, novoNome);
+        } else {
+            // ID encontrado, atualizar o nome
+            No.departamento.setNome(novoNome);
+        }
+
+        // Atualizar altura do nó pai
+        No.height = 1 + Math.max(height(No.left), height(No.right));
+
+        // Verificar o fator de balanceamento e realizar rotações, se necessário
+        int balance = getBalance(No);
+
+        // Casos de rotação
+        if (balance > 1) {
+            if (id < No.left.departamento.getId()) {
+                return rotateRight(No);
+            } else {
+                No.left = rotateLeft(No.left);
+                return rotateRight(No);
+            }
+        }
+        if (balance < -1) {
+            if (id > No.right.departamento.getId()) {
+                return rotateLeft(No);
+            } else {
+                No.right = rotateRight(No.right);
+                return rotateLeft(No);
+            }
+        }
+
+        return No;
+    }
+
+    // Método para excluir um nó com base no ID
+    public void delete(int id) {
+        root = delete(root, id);
+    }
+
+    private No delete(No No, int id) {
+        // Implementação da lógica de exclusão na árvore AVL baseada no ID
+        if (No == null) {
+            return null;
+        }
+
+        if (id < No.departamento.getId()) {
+            No.left = delete(No.left, id);
+        } else if (id > No.departamento.getId()) {
+            No.right = delete(No.right, id);
+        } else {
+            // Nó encontrado, realizar a exclusão
+
+            // Caso 1: Nó com um ou nenhum filho
+            if (No.left == null || No.right == null) {
+                No temp = (No.left != null) ? No.left : No.right;
+
+                // Caso 1a: Nenhum filho
+                if (temp == null) {
+                    temp = No;
+                    No = null;
+                } else { // Caso 1b: Um filho
+                    No = temp;
                 }
+            } else { // Caso 2: Nó com dois filhos
+                No temp = findMin(No.right);
+                No.departamento = temp.departamento;
+                No.right = delete(No.right, temp.departamento.getId());
             }
-
-            // Se a árvore tinha apenas um nó, então retornar
-            if (root == null) {
-                return root;
-            }
-
-            // Atualizar a altura do nó atual
-            root.setPeso(max(height(root.getNoEsquerdo()), height(root.getNoDireito())) + 1);
-
-            // Verificar o balanceamento do nó
-            int balance = getBalance(root);
-
-            // Rotação à direita
-            if (balance > 1 && getBalance(root.getNoEsquerdo()) >= 0) {
-                return rightRotate(root);
-            }
-
-            // Rotação à esquerda
-            if (balance < -1 && getBalance(root.getNoDireito()) <= 0) {
-                return leftRotate(root);
-            }
-
-            // Rotação dupla à direita (esquerda-direita)
-            if (balance > 1 && getBalance(root.getNoEsquerdo()) < 0) {
-                root.setNoEsquerdo(leftRotate(root.getNoEsquerdo()));
-                return rightRotate(root);
-            }
-
-            // Rotação dupla à esquerda (direita-esquerda)
-            if (balance < -1 && getBalance(root.getNoDireito()) > 0) {
-                root.setNoDireito(rightRotate(root.getNoDireito()));
-                return leftRotate(root);
-            }
-
-            return root;
         }
 
-        void deleteNode(int key) {
-            root = delete(root, key);
+        // Se o nó foi excluído, retornar null
+        if (No == null) {
+            return null;
         }
 
-        No search(No root, int key) {
-            if (root == null || root.getId() == key) {
-                return root;
-            }
+        // Atualizar altura do nó pai
+        No.height = 1 + Math.max(height(No.left), height(No.right));
 
-            if (key < root.getId()) {
-                return search(root.getNoEsquerdo(), key);
-            }
+        // Verificar o fator de balanceamento e realizar rotações, se necessário
+        int balance = getBalance(No);
 
-            return search(root.getNoDireito(), key);
-        }
-
-        public void searchById(int key) {
-            No result = search(root, key);
-            if (result != null) {
-                System.out.println("Nó com ID " + key + " encontrado na árvore.");
+        // Casos de rotação
+        if (balance > 1) {
+            if (getBalance(No.left) >= 0) {
+                return rotateRight(No);
             } else {
-                System.out.println("Nó com ID " + key + " não encontrado na árvore.");
+                No.left = rotateLeft(No.left);
+                return rotateRight(No);
             }
         }
+        if (balance < -1) {
+            if (getBalance(No.right) <= 0) {
+                return rotateLeft(No);
+            } else {
+                No.right = rotateRight(No.right);
+                return rotateLeft(No);
+            }
+        }
+
+        return No;
+    }
+
+    // Métodos de auxílio
+
+    // Altura de um nó (considera nulo como altura 0)
+    private int height(No No) {
+        return (No == null) ? 0 : No.height;
+    }
+
+    // Fator de balanceamento de um nó
+    private int getBalance(No No) {
+        return (No == null) ? 0 : height(No.left) - height(No.right);
+    }
+
+    // Rotações
+
+    // Rotação à direita
+    private No rotateRight(No y) {
+        No x = y.left;
+        No T2 = x.right;
+
+        x.right = y;
+        y.left = T2;
+
+        // Atualizar alturas
+        y.height = 1 + Math.max(height(y.left), height(y.right));
+        x.height = 1 + Math.max(height(x.left), height(x.right));
+
+        return x;
+    }
+
+    // Rotação à esquerda
+    private No rotateLeft(No x) {
+        No y = x.right;
+        No T2 = y.left;
+
+        y.left = x;
+        x.right = T2;
+
+        // Atualizar alturas
+        x.height = 1 + Math.max(height(x.left), height(x.right));
+        y.height = 1 + Math.max(height(y.left), height(y.right));
+
+        return y;
+    }
+
+    // Encontrar o nó mínimo em uma subárvore
+    private No findMin(No No) {
+        while (No.left != null) {
+            No = No.left;
+        }
+        return No;
+    }
+
+    public void printTree() {
+        printTree(root);
+    }
+
+    private void printTree(No node) {
+        if (node != null) {
+            printTree(node.left);
+            System.out.println("ID: " + node.departamento.getId() + ", Nome: " + node.departamento.getNome());
+            printTree(node.right);
+        }
+    }
 
 }
 

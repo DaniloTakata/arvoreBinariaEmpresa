@@ -8,7 +8,7 @@ public class Funcionario {
 
     public Funcionario() {}
 
-    public Funcionario(int id, String nome, String cargo) {
+    public Funcionario(String nome, String cargo) {
         this.id = this.id + 1;
         this.nome = nome;
         this.cargo = cargo;

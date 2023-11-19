@@ -1,9 +1,12 @@
 package codigoArvore.classes;
 
+import codigoArvore.lista.ListaCelula;
+
 public class Gerente {
 
     private int id = 0;
     private String nome;
+    private ListaCelula funcionario;
 
     public Gerente() {}
 
@@ -26,5 +29,13 @@ public class Gerente {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public ListaCelula getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(ListaCelula funcionario) {
+        this.funcionario = funcionario;
     }
 }
