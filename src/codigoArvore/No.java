@@ -48,4 +48,14 @@ public class No {
     public void setHeight(int height) {
         this.height = height;
     }
+
+    @Override
+    public String toString() {
+        return "No{" +
+                "departamento=" + departamento +
+                ", left=" + left +
+                ", right=" + right +
+                ", height=" + height +
+                '}';
+    }
 }

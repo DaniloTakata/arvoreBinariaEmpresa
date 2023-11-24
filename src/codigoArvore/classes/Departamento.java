@@ -43,4 +43,28 @@ public class Departamento {
     public void setGerente(Gerente gerente) {
         this.gerente = gerente;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Departamento that = (Departamento) o;
+
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Departamento{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", gerente=" + gerente.getNome() +
+                '}';
+    }
 }

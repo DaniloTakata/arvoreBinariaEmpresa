@@ -33,5 +33,14 @@ public class Main {
         System.out.println("Árvore AVL:");
         avlTree.printTree();
 
+        System.out.println("\n\nPercurso Pré-Ordem:");
+        avlTree.percorrerPreOrdem(avlTree.getRoot());
+
+        System.out.println("\n\nPercurso Em Ordem:");
+        avlTree.percorrerEmOrdem(avlTree.getRoot());
+
+        System.out.println("\n\nPercurso Pós-Ordem:");
+        avlTree.percorrerPosOrdem(avlTree.getRoot());
+
     }
 }

@@ -89,19 +89,93 @@ public class Principal {
 
                     Departamento departamentoEncontrado = arvore.search(idBuscado);
 
-                    if (departamentoEncontrado.getGerente() == null) {
+                    if (departamentoEncontrado != null) {
 
-                        System.out.print("\nDigite o nome do gerente: ");
-                        String nomeGerente = sc.next();
+                        if (departamentoEncontrado.getGerente() == null) {
 
-                        departamentoEncontrado.setGerente(new Gerente(nomeGerente));
+                            System.out.print("\nDigite o nome do gerente: ");
+                            String nomeGerente = sc.next();
+
+                            departamentoEncontrado.setGerente(new Gerente(nomeGerente));
+                        } else {
+                            System.out.println("\nJá existe gerente!");
+                        }
+
                     } else {
-                        System.out.println("\nJá existe gerente!");
+                        System.out.println("\nDepartamento não encontrado!!");
                     }
 
                     break;
                 } case 3 -> {
-                    
+                    System.out.print("\nDigite o id do departamento: ");
+                    int idBuscado = sc.nextInt();
+
+                    Departamento departamentoEncontrado = arvore.search(idBuscado);
+
+                    if (departamentoEncontrado != null) {
+
+                        if (departamentoEncontrado.getGerente() != null) {
+
+                            ListaCelula listaCelula = (departamentoEncontrado.getGerente()).getFuncionario();
+
+                            System.out.print("\nDigite o nome do funcionário: ");
+                            String nomeFuncionario = sc.next();
+                            System.out.print("\nDigite o cargo do funcionário: ");
+                            String cargoFuncionario = sc.next();
+
+                            listaCelula.insereCelula(new Celula(new Funcionario(nomeFuncionario, cargoFuncionario),
+                                    null));
+
+                            (departamentoEncontrado.getGerente()).setFuncionario(listaCelula);
+
+                            System.out.println("\nFuncionário inserido com sucesso!\n" +
+                                    "Departamento: " + departamentoEncontrado.getId() +
+                                    "\nGerente: " + (departamentoEncontrado.getGerente()).getNome());
+                        } else {
+                            System.out.println("\nNão é possível inserir funcionário, gerente não existente!");
+                        }
+
+                    } else {
+                        System.out.println("\nNão é possível inserir funcionário, departamento não existente!");
+                    }
+
+                } case 4 -> {
+
+                    System.out.print("\nDigite o id do departamento: ");
+                    int idBuscado = sc.nextInt();
+
+                    Departamento departamentoEncontrado = arvore.search(idBuscado);
+
+                    if (departamentoEncontrado != null) {
+                        System.out.println("\nDepartamento encontrado!\n" + departamentoEncontrado.toString());
+                    } else {
+                        System.out.print("\nDepartamento não encontrado!");
+                    }
+
+                    break;
+                } case 5 -> {
+
+                    System.out.print("\nDigite o id do departamento: ");
+                    int idBuscado = sc.nextInt();
+
+                    Departamento departamentoEncontrado = arvore.search(idBuscado);
+
+                    if (departamentoEncontrado != null) {
+
+                        if (departamentoEncontrado.getGerente() != null) {
+                            System.out.print("\nGerente encontrado!\n" + (departamentoEncontrado.getGerente()).toString());
+                        } else {
+                            System.out.println("\nGerente não encontrado!!");
+                        }
+
+                    } else {
+                        System.out.print("\nDepartamento não encontrado!");
+                    }
+
+                    break;
+                } case 6 -> {
+
+
                 }
 
 

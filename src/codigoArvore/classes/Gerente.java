@@ -38,4 +38,28 @@ public class Gerente {
     public void setFuncionario(ListaCelula funcionario) {
         this.funcionario = funcionario;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Gerente gerente = (Gerente) o;
+
+        return id == gerente.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Gerente{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", funcionario=" + funcionario +
+                '}';
+    }
 }

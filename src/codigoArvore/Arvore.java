@@ -6,6 +6,14 @@ public class Arvore {
 
     private No root;
 
+    public No getRoot() {
+        return root;
+    }
+
+    public void setRoot(No root) {
+        this.root = root;
+    }
+
     // Métodos CRUD baseados no ID
 
     // Método para inserir um nó com base no ID
@@ -248,6 +256,33 @@ public class Arvore {
             printTree(node.left);
             System.out.println("ID: " + node.departamento.getId() + ", Nome: " + node.departamento.getNome());
             printTree(node.right);
+        }
+    }
+
+    // Percurso pré-ordem: Raiz -> Esquerda -> Direita
+    public void percorrerPreOrdem(No no) {
+        if (no != null) {
+            System.out.print(no.getDepartamento().getNome()+ " ");
+            percorrerPreOrdem(no.left);
+            percorrerPreOrdem(no.right);
+        }
+    }
+
+    // Percurso em ordem: Esquerda -> Raiz -> Direita
+    public void percorrerEmOrdem(No no) {
+        if (no != null) {
+            percorrerEmOrdem(no.left);
+            System.out.print(no.getDepartamento().getNome() + " ");
+            percorrerEmOrdem(no.right);
+        }
+    }
+
+    // Percurso pós-ordem: Esquerda -> Direita -> Raiz
+    public void percorrerPosOrdem(No no) {
+        if (no != null) {
+            percorrerPosOrdem(no.left);
+            percorrerPosOrdem(no.right);
+            System.out.print(no.getDepartamento().getNome() + " ");
         }
     }
 
