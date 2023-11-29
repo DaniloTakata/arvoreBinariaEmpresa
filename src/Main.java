@@ -89,7 +89,7 @@ public class Main {
 
         System.out.println();
         System.out.print("Printagem da estrutura");
-        arvore.imprimeArvoreComoEstrutura();
+        arvore.imprimeArvoreComoEstrutura(); // erro nessa funcao, nullpointer
 
     }
 }
