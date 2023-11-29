@@ -1,46 +1,95 @@
-import codigoArvore.Arvore;
-
+import codigoArvore.AVL.ArvoreAVL;
 import codigoArvore.classes.Departamento;
 
 public class Main {
     public static void main(String[] args) {
-        /*
-        * Todos os testes realizado foram implementados de uma maneira mais fixa e direta;
-        * Intuito apenas de verificar o funcionamento das funções;
-        * */
 
-        Arvore avlTree = new Arvore();
+        ArvoreAVL arvore = new ArvoreAVL();
 
-        avlTree.insert(1, "RH");
-        avlTree.insert(2, "TI");
-        avlTree.insert(3, "Vendas");
 
-        int idBuscar = 2;
-        Departamento encontrado = avlTree.search(idBuscar);
-        if (encontrado != null) {
-            System.out.println("Departamento encontrado: " + encontrado.getNome());
-        } else {
-            System.out.println("Departamento não encontrado.");
-        }
+        arvore.inserir(1, new Departamento("CEO"));
+        arvore.inserir(2, new Departamento("RH"));
+        arvore.inserir(3, new Departamento("TI"));
+        arvore.inserir(4, new Departamento("VENDAS"));
+        arvore.inserir(5, new Departamento("FINANCEIRO"));
+        arvore.inserir(6, new Departamento("CONTABIL"));
+        arvore.inserir(7, new Departamento("GERENCIA"));
+        arvore.inserir(8, new Departamento("DESENVOLVIMENTO"));
+        arvore.inserir(9, new Departamento("IMPLANTACAO"));
+        arvore.inserir(10, new Departamento("GESTAO"));
 
-        int idAtualizar = 2;
-        String novoNome = "Tecnologia da Informação";
-        avlTree.update(idAtualizar, novoNome);
 
-        int idExcluir = 1;
-        avlTree.delete(idExcluir);
+        System.out.println();
+        System.out.print("Balanceamento (in-order): ");
+        System.out.println();
+        arvore.imprimeArvoreInOrder();
 
-        System.out.println("Árvore AVL:");
-        avlTree.printTree();
+        System.out.println();
+        System.out.println("Buscando valor 1...");
+        System.out.println(arvore.buscar(1));
+        System.out.println();
 
-        System.out.println("\n\nPercurso Pré-Ordem:");
-        avlTree.percorrerPreOrdem(avlTree.getRoot());
+        System.out.println();
+        System.out.println("Buscando valor 7...");
+        System.out.println(arvore.buscar(7));
+        System.out.println();
 
-        System.out.println("\n\nPercurso Em Ordem:");
-        avlTree.percorrerEmOrdem(avlTree.getRoot());
+        System.out.println();
+        System.out.println("Buscando valor 15...");
+        System.out.println(arvore.buscar(15));
+        System.out.println();
 
-        System.out.println("\n\nPercurso Pós-Ordem:");
-        avlTree.percorrerPosOrdem(avlTree.getRoot());
+        System.out.println();
+        System.out.println("Removendo valor 10...");
+
+        arvore.remover(10);
+
+        System.out.println();
+        System.out.print("Balanceamento (in-order): ");
+        System.out.println();
+        arvore.imprimeArvoreInOrder();
+
+        System.out.println();
+        System.out.println("Removendo valor 2...");
+
+        arvore.remover(2);
+
+        System.out.println();
+        System.out.print("Balanceamento (in-order): ");
+        System.out.println();
+        arvore.imprimeArvoreInOrder();
+
+        System.out.println();
+        System.out.println("Inserindo valor 12...");
+        arvore.inserir(12, new Departamento());
+
+        System.out.println();
+        System.out.print("Balanceamento (in-order): ");
+        System.out.println();
+        arvore.imprimeArvoreInOrder();
+
+        System.out.println();
+        System.out.println("Inserindo valor 50...");
+        arvore.inserir(50, new Departamento());
+
+        System.out.println();
+        System.out.print("Balanceamento (in-order): ");
+        System.out.println();
+        arvore.imprimeArvoreInOrder();
+
+        System.out.println();
+        System.out.println("Tentando remover valor 40 (inexistente)...");
+        arvore.remover(40);
+        System.out.println("Nada acontece.");
+
+        System.out.println();
+        System.out.print("Balanceamento (in-order): ");
+        System.out.println();
+        arvore.imprimeArvoreInOrder();
+
+        System.out.println();
+        System.out.print("Printagem da estrutura");
+        arvore.imprimeArvoreComoEstrutura();
 
     }
 }

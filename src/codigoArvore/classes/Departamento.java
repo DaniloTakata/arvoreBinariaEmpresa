@@ -1,32 +1,23 @@
 package codigoArvore.classes;
 
+import java.util.Objects;
+
 public class Departamento {
 
-    int id;
     String nome;
 
     Gerente gerente;
 
-    public Departamento(int id, String nome) {
-        this.id = id;
+    public Departamento(String nome) {
         this.nome = nome;
     }
 
-    public Departamento(int id, String nome, Gerente gerente) {
-        this.id = id;
+    public Departamento(String nome, Gerente gerente) {
         this.nome = nome;
         this.gerente = gerente;
     }
 
     public Departamento() {}
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;
@@ -51,20 +42,19 @@ public class Departamento {
 
         Departamento that = (Departamento) o;
 
-        return id == that.id;
+        return Objects.equals(nome, that.nome);
     }
 
     @Override
     public int hashCode() {
-        return id;
+        return nome != null ? nome.hashCode() : 0;
     }
 
     @Override
     public String toString() {
         return "Departamento{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", gerente=" + gerente.getNome() +
+                "nome='" + nome + '\'' +
+                ", gerente=" + gerente +
                 '}';
     }
 }
