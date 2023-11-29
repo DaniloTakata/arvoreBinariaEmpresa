@@ -40,9 +40,9 @@ public class ArvoreAVL {
 
             if (atual == null) {
                 if (vaiParaEsquerda) {
-                    pai.setEsquerda(new NoAVL(chave, pai));
+                    pai.setEsquerda(new NoAVL(chave, pai, departamento));
                 } else {
-                    pai.setDireita(new NoAVL(chave, pai));
+                    pai.setDireita(new NoAVL(chave, pai, departamento));
                 }
                 rebalancear(pai);
                 break;
@@ -306,7 +306,7 @@ public class ArvoreAVL {
 
     private void imprimeArvoreComoEstruturaRecursivo(NoAVL no, int nivel, String prefixo) {
         if (no != null) {
-            System.out.println(prefixo + "|__ " + no.getChave() +", "+no.getDepartamento().getNome());
+            System.out.println(prefixo + "|__ " + no.getChave() + ", " + (no.getDepartamento() != null ? no.getDepartamento().getNome() : "Departamento nulo"));
 
             if (no.getDireita() != null || no.getEsquerda() != null) {
                 imprimeArvoreComoEstruturaRecursivo(no.getDireita(), nivel + 1, prefixo + "|   ");
