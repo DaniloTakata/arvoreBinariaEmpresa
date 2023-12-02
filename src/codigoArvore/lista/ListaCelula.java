@@ -108,4 +108,10 @@ public class ListaCelula {
 
     }
 
+    public void buscaNome(String nomeBuscado) {
+
+
+
+    }
+
 }

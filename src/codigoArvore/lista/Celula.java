@@ -14,6 +14,10 @@ public class Celula {
         this.celulaProximo = celulaProximo;
     }
 
+    public Celula(Funcionario funcionarioCelula) {
+        this(funcionarioCelula, null);
+    }
+
     public Funcionario getFuncionarioCelula() {
         return funcionarioCelula;
     }
