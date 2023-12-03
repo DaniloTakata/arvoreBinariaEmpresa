@@ -94,6 +94,32 @@ public class ArvoreAVL {
         return false;
     }
 
+    public NoAVL devolveNo(int chave) {
+        if (this.raiz == null)
+            return null;
+
+        NoAVL filho = this.raiz;
+        while (filho != null) {
+            NoAVL no = filho;
+            filho = chave >= no.getChave() ? no.getDireita() : no.getEsquerda();
+            if (chave == no.getChave()) {
+                return no;
+            }
+        }
+        return null;
+    }
+
+    // Esse i sempre será 1 por padrão
+    public NoAVL buscarNomeNo(String nomeBuscado, int i) {
+        NoAVL noEncontrado = this.devolveNo(i);
+
+        if ((noEncontrado.getDepartamento()).getNome().equals(nomeBuscado)) {
+            return noEncontrado;
+        } else {
+            return this.buscarNomeNo(nomeBuscado, i++);
+        }
+    }
+
     private void rebalancear(NoAVL no) {
         setBalanceamento(no);
 

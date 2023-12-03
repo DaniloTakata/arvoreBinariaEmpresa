@@ -108,10 +108,21 @@ public class ListaCelula {
 
     }
 
-    public void buscaNome(String nomeBuscado) {
+    public Funcionario buscaNome(String nomeBuscado) {
+        Celula celulaAtual = null;
 
+        for (int i = 0; i < this.indice; i++) {
+            celulaAtual = this.funcionarioPrimeiro;
+            Funcionario funcionarioAtual = celulaAtual.getFuncionarioCelula();
 
+            if (funcionarioAtual.getNome().equals(nomeBuscado)) {
+                return funcionarioAtual;
+            }
 
+            celulaAtual = celulaAtual.getCelulaProximo();
+        }
+
+        return null;
     }
 
 }

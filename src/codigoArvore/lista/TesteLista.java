@@ -36,13 +36,15 @@ public class TesteLista {
                     String cargo = scan.next();
 
                     celulas.insereCelula(new Celula(new Funcionario(nome, cargo)));
-                    //System.out.println("Inserido com sucesso!!!\n" + );
+                    System.out.println("Inserido com sucesso!!!\n" + celulas.buscaNome(nome));
 
                     break;
                 } case 2 -> {
+                    System.out.print("\nDigite o nome do Funcionário buscado: ");
+                    String nomeFuncionarioBuscado = scan.next();
 
-                    System.out.print("");
-
+                    
+                    break;
                 }
 
 
