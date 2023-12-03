@@ -29,14 +29,7 @@ public class ListaCelula {
     }
 
     public void inserePrimeiro(Celula novaCelula) {
-        if (this.indice == 0) {
-            this.funcionarioPrimeiro = novaCelula;
-        } else {
-            Celula celulaAntiga = this.getFuncionarioPrimeiro();
-            novaCelula.setCelulaProximo(celulaAntiga);
-            this.funcionarioPrimeiro = novaCelula;
-        }
-        this.indice++;
+        this.funcionarioPrimeiro = novaCelula;
     }
 
     public void insereCelula(Celula novaCelula) {
@@ -109,10 +102,9 @@ public class ListaCelula {
     }
 
     public Funcionario buscaNome(String nomeBuscado) {
-        Celula celulaAtual = null;
+        Celula celulaAtual = this.funcionarioPrimeiro;
 
         for (int i = 0; i < this.indice; i++) {
-            celulaAtual = this.funcionarioPrimeiro;
             Funcionario funcionarioAtual = celulaAtual.getFuncionarioCelula();
 
             if (funcionarioAtual.getNome().equals(nomeBuscado)) {
@@ -123,6 +115,21 @@ public class ListaCelula {
         }
 
         return null;
+    }
+
+    public void printarLista() {
+
+        Celula celulaAtual = this.funcionarioPrimeiro;
+
+        System.out.print("[ \n");
+        for (int i = 0; i < this.indice; i++) {
+            Funcionario funcionarioAtual = celulaAtual.getFuncionarioCelula();
+            System.out.print("    " + funcionarioAtual.toString() + "\n");
+
+            celulaAtual = celulaAtual.getCelulaProximo();
+        }
+        System.out.print("]");
+
     }
 
 }

@@ -2,14 +2,15 @@ package codigoArvore.classes;
 
 public class Funcionario {
 
-    private int id = 0;
+    private static int id_base = 0;
+    private int id;
     private String nome;
     private String cargo;
 
     public Funcionario() {}
 
     public Funcionario(String nome, String cargo) {
-        this.id = this.id + 1;
+        this.id = id_base++;
         this.nome = nome;
         this.cargo = cargo;
     }
@@ -55,7 +56,7 @@ public class Funcionario {
 
     @Override
     public String toString() {
-        return "Funcionario{" +
+        return "{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", cargo='" + cargo + '\'' +

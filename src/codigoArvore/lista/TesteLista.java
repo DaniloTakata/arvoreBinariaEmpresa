@@ -16,14 +16,15 @@ public class TesteLista {
                 "\n2. Buscar" +
                 "\n3. Atualizar" +
                 "\n4. Remover" +
-                "\n5. Sair" +
+                "\n5. Printar lista" +
+                "\n6. Sair" +
                 "\nOpção: ";
         int comando;
 
         System.out.print(menu);
         comando = scan.nextInt();
 
-        while (comando != 5) {
+        while (comando != 6) {
 
             switch (comando) {
                 default -> {
@@ -43,16 +44,56 @@ public class TesteLista {
                     System.out.print("\nDigite o nome do Funcionário buscado: ");
                     String nomeFuncionarioBuscado = scan.next();
 
-                    
+                    Funcionario funcionarioEncontrado = celulas.buscaNome(nomeFuncionarioBuscado);
+
+                    if (funcionarioEncontrado != null) {
+                        System.out.println("\nFuncionário encontrado!!! " + funcionarioEncontrado.toString());
+                    } else {
+                        System.out.println("\nFuncionário não encontrado!!!");
+                    }
+
+                    break;
+                } case 3 -> {
+                    System.out.print("\nDigite o nome do Funcionário buscado: ");
+                    String nomeFuncionarioBuscado = scan.next();
+
+                    Funcionario funcionarioEncontrado = celulas.buscaNome(nomeFuncionarioBuscado);
+
+                    if (funcionarioEncontrado != null) {
+                        System.out.println("\nFuncionário encontrado!!! " + funcionarioEncontrado.toString());
+
+                        System.out.print("\nDigite o novo nome do funcionário: ");
+                        String novoNome = scan.next();
+                        System.out.print("\nDigite o novo cargo do funcionário: ");
+                        String novoCargo = scan.next();
+
+                        funcionarioEncontrado.setNome(novoNome);
+                        funcionarioEncontrado.setCargo(novoCargo);
+
+                    } else {
+                        System.out.println("\nFuncionário não encontrado!!!");
+                    }
+
+                    break;
+                } case 4 -> {
+                    System.out.print("\nDigite a posição a ser removida: ");
+                    int posicaoRemovida = scan.nextInt();
+
+                    celulas.removePosicao(posicaoRemovida);
+
+                    break;
+                } case 5 -> {
+                    celulas.printarLista();
+
                     break;
                 }
-
-
             }
-
+            System.out.print("\n\n" + menu);
+            comando = scan.nextInt();
         }
 
+        scan.close();
+        System.out.println("\nSISTEMA FINALIZADO!!!");
     }
-
 
 }
