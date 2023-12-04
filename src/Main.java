@@ -1,5 +1,7 @@
 import codigoArvore.AVL.ArvoreAVL;
+import codigoArvore.AVL.NoAVL;
 import codigoArvore.classes.Departamento;
+import codigoArvore.classes.Gerente;
 
 
 public class Main {
@@ -12,19 +14,23 @@ public class Main {
 
         ArvoreAVL arvore = new ArvoreAVL();
 
-        arvore.inserir(1, new Departamento("CEO"));
+        arvore.inserir(1, new Departamento("CEO", new Gerente("Danilo")));
         arvore.imprimeArvoreComoEstrutura();
         System.out.println("\n\n------------------------------\n");
 
-        arvore.inserir(2, new Departamento("RH"));
-        arvore.inserir(3, new Departamento("SUB RH"));
-        arvore.inserir(4, new Departamento("VENDAS"));
-        arvore.inserir(5, new Departamento("GESTÃO"));
-        arvore.inserir(6, new Departamento("ORIPEDES"));
-        arvore.inserir(7, new Departamento("MISTER"));
+        arvore.inserir(2, new Departamento("RH", new Gerente("Julinha do picole")));
+        arvore.inserir(3, new Departamento("TI", new Gerente("Vinicius")));
+
+        NoAVL noEncontrado = arvore.buscarPorNome("TI");
+        if (noEncontrado != null) {
+
+            noEncontrado.setDepartamento(new Departamento("TI", new Gerente("Geovanna")));
+
+        } else {
+            System.out.println("\nDepartamento não encontrado!");
+        }
+
         arvore.imprimeArvoreComoEstrutura();
-
-
 
     }
 }

@@ -94,29 +94,23 @@ public class ArvoreAVL {
         return false;
     }
 
-    public NoAVL devolveNo(int chave) {
-        if (this.raiz == null)
-            return null;
-
-        NoAVL filho = this.raiz;
-        while (filho != null) {
-            NoAVL no = filho;
-            filho = chave >= no.getChave() ? no.getDireita() : no.getEsquerda();
-            if (chave == no.getChave()) {
-                return no;
-            }
-        }
-        return null;
+    public NoAVL buscarPorNome(String nome) {
+        return buscarPorNome(this.raiz, nome);
     }
 
-    // Esse i sempre será 1 por padrão
-    public NoAVL buscarNomeNo(String nomeBuscado, int i) {
-        NoAVL noEncontrado = this.devolveNo(i);
+    private NoAVL buscarPorNome(NoAVL no, String nome) {
+        if (no == null) {
+            return null;
+        }
 
-        if ((noEncontrado.getDepartamento()).getNome().equals(nomeBuscado)) {
-            return noEncontrado;
+        int comparacao = nome.compareTo(no.getDepartamento().getNome());
+
+        if (comparacao < 0) {
+            return buscarPorNome(no.getEsquerda(), nome);
+        } else if (comparacao > 0) {
+            return buscarPorNome(no.getDireita(), nome);
         } else {
-            return this.buscarNomeNo(nomeBuscado, i++);
+            return no;
         }
     }
 
@@ -265,7 +259,8 @@ public class ArvoreAVL {
 
     private void imprimeArvoreComoEstruturaRecursivo(NoAVL no, int nivel, String prefixo) {
         if (no != null) {
-            System.out.println(prefixo + "|__ " + no.getChave() + ", " + (no.getDepartamento() != null ? no.getDepartamento().getNome() : "Departamento nulo"));
+            System.out.println(prefixo + "|__ " + no.getChave() + ", " + (no.getDepartamento() != null ? no.getDepartamento().getNome() : "Departamento nulo") +
+                    "    " + no.toString());
 
             if (no.getDireita() != null || no.getEsquerda() != null) {
                 imprimeArvoreComoEstruturaRecursivo(no.getDireita(), nivel + 1, prefixo + "|   ");

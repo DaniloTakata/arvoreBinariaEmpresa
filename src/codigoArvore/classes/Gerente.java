@@ -4,14 +4,16 @@ import codigoArvore.lista.ListaCelula;
 
 public class Gerente {
 
-    private int id = 0;
+    private static int base_id = 0;
+
+    private int id;
     private String nome;
     private ListaCelula funcionario;
 
     public Gerente() {}
 
     public Gerente(String nome) {
-        this.id = this.id + 1;
+        this.id = base_id++;
         this.nome = nome;
     }
 

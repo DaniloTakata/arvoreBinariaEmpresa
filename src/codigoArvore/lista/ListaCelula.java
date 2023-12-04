@@ -132,4 +132,8 @@ public class ListaCelula {
 
     }
 
+    public int qtdFuncionario() {
+        return this.indice;
+    }
+
 }

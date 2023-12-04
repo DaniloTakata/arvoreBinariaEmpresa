@@ -119,13 +119,7 @@ public class NoAVL {
     @Override
     public String toString() {
         return "NoAVL{" +
-                "chave=" + chave +
-                ", balanceamento=" + balanceamento +
-                ", altura=" + altura +
-                ", esquerda=" + esquerda +
-                ", direita=" + direita +
-                ", pai=" + pai +
-                ", departamento=" + departamento +
+                "departamento=" + departamento +
                 '}';
     }
 }
