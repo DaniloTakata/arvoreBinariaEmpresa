@@ -61,7 +61,7 @@ public class Gerente {
         return "Gerente{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
-                ", funcionario=" + funcionario +
+                ", funcionario=" + funcionario.printarLista() +
                 '}';
     }
 }

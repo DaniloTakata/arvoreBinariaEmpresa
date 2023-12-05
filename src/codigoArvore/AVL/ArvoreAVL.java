@@ -94,6 +94,22 @@ public class ArvoreAVL {
         return false;
     }
 
+    public NoAVL buscarId(int chave) {
+        if (this.raiz == null)
+            return null;
+
+        NoAVL filho = this.raiz;
+        while (filho != null) {
+            NoAVL no = filho;
+
+            filho = chave >= no.getChave() ? no.getDireita() : no.getEsquerda();
+            if (chave == no.getChave()) {
+                return filho;
+            }
+        }
+        return null;
+    }
+
     public NoAVL buscarPorNome(String nome) {
         return buscarPorNome(this.raiz, nome);
     }

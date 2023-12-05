@@ -101,6 +101,19 @@ public class ListaCelula {
 
     }
 
+    public int removePorNome(String nomeBuscado) {
+
+        Celula celulaAtual = this.funcionarioPrimeiro;
+        for (int i = 0; i < this.indice; i++) {
+
+            if ((celulaAtual.getFuncionarioCelula().getNome()).equals(nomeBuscado)) {
+                return i;
+            }
+
+        }
+        return -999;
+    }
+
     public Funcionario buscaNome(String nomeBuscado) {
         Celula celulaAtual = this.funcionarioPrimeiro;
 
@@ -117,19 +130,19 @@ public class ListaCelula {
         return null;
     }
 
-    public void printarLista() {
+    public String printarLista() {
 
         Celula celulaAtual = this.funcionarioPrimeiro;
 
-        System.out.print("[ \n");
+        String retorno = "[\n";
         for (int i = 0; i < this.indice; i++) {
             Funcionario funcionarioAtual = celulaAtual.getFuncionarioCelula();
-            System.out.print("    " + funcionarioAtual.toString() + "\n");
-
+            retorno += "    " + funcionarioAtual.toString() + "\n";
             celulaAtual = celulaAtual.getCelulaProximo();
         }
-        System.out.print("]");
+        retorno += "\n]";
 
+        return retorno;
     }
 
     public int qtdFuncionario() {
