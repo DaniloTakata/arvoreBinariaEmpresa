@@ -134,13 +134,19 @@ public class ListaCelula {
 
         Celula celulaAtual = this.funcionarioPrimeiro;
 
-        String retorno = "[\n";
+        String retorno = "[";
         for (int i = 0; i < this.indice; i++) {
             Funcionario funcionarioAtual = celulaAtual.getFuncionarioCelula();
-            retorno += "    " + funcionarioAtual.toString() + "\n";
+
+            if (i == (this.indice - 1)) {
+                retorno += funcionarioAtual.toString();
+            } else {
+                retorno += funcionarioAtual.toString() + ", ";
+            }
+
             celulaAtual = celulaAtual.getCelulaProximo();
         }
-        retorno += "\n]";
+        retorno += "]";
 
         return retorno;
     }

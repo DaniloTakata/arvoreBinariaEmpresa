@@ -59,7 +59,7 @@ public class Main {
                     arvoreAVL.inserir(idControle, new Departamento(nomeDepartamento, gerente));
                     idControle++;
 
-                    System.out.print("\nInserido com sucesso! \n" + arvoreAVL.buscarPorNome(nomeDepartamento));
+                    System.out.print("\nInserido com sucesso!");
 
                     break;
                 } case 2 -> {
@@ -99,7 +99,8 @@ public class Main {
                         int qtdFun = sc.nextInt();
 
                         int cont = 0;
-                        ListaCelula funcionarios = new ListaCelula();
+                        ListaCelula funcionarios = ((noAVLEncontrado.getDepartamento()).getGerente()).getFuncionario();
+                        System.out.println("LISTA ATUAL -> " + funcionarios.printarLista());
                         while (cont < qtdFun) {
                             System.out.print("\nDigite o nome do funcionário: ");
                             String nomeFun = sc.next();
@@ -109,6 +110,7 @@ public class Main {
                             funcionarios.insereCelula(new Celula(new Funcionario(nomeFun, cargoFun)));
                             cont++;
                         }
+                        System.out.println("NOVA LISTA -> " + funcionarios.printarLista());
                         ((noAVLEncontrado.getDepartamento()).getGerente()).setFuncionario(funcionarios);
                     } else {
                         System.out.print("\nDepartamento não encontrado!");

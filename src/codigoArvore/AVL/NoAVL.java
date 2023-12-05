@@ -118,8 +118,8 @@ public class NoAVL {
 
     @Override
     public String toString() {
-        return "NoAVL{" +
+        return "{" +
                 "departamento=" + departamento +
-                '}';
+                "}";
     }
 }

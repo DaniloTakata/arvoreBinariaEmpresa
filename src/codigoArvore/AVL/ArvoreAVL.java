@@ -104,7 +104,7 @@ public class ArvoreAVL {
 
             filho = chave >= no.getChave() ? no.getDireita() : no.getEsquerda();
             if (chave == no.getChave()) {
-                return filho;
+                return no;
             }
         }
         return null;

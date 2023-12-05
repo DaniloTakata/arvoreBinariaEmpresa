@@ -58,10 +58,10 @@ public class Gerente {
 
     @Override
     public String toString() {
-        return "Gerente{" +
+        return "{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", funcionario=" + funcionario.printarLista() +
-                '}';
+                "}";
     }
 }
