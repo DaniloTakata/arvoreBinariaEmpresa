@@ -103,7 +103,7 @@ public class Main {
 
                         int cont = 0;
                         ListaCelula funcionarios = ((noAVLEncontrado.getDepartamento()).getGerente()).getFuncionario();
-                        System.out.println("LISTA ATUAL -> " + funcionarios.printarLista());
+
                         while (cont < qtdFun) {
                             System.out.print("\nDigite o nome do funcionário: ");
                             String nomeFun = sc.next();
@@ -113,7 +113,7 @@ public class Main {
                             funcionarios.insereCelula(new Celula(new Funcionario(nomeFun, cargoFun)));
                             cont++;
                         }
-                        System.out.println("NOVA LISTA -> " + funcionarios.printarLista());
+
                         ((noAVLEncontrado.getDepartamento()).getGerente()).setFuncionario(funcionarios);
                     } else {
                         System.out.print("\nDepartamento não encontrado!");

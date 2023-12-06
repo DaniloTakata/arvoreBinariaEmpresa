@@ -77,13 +77,13 @@ public class TesteLista {
                     break;
                 } case 4 -> {
                     System.out.print("\nDigite a posição a ser removida: ");
-                    int posicaoRemovida = scan.nextInt();
+                    String nomeBuscado = scan.next();
 
-                    celulas.removePosicao(posicaoRemovida);
+                    System.out.println(celulas.removePorNome(nomeBuscado));
 
                     break;
                 } case 5 -> {
-                    celulas.printarLista();
+                    System.out.println(celulas.printarLista());
 
                     break;
                 }

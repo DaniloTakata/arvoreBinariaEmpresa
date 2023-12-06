@@ -103,24 +103,34 @@ public class ListaCelula {
 
     public boolean removePorNome(String nomeBuscado) {
 
-        if (this.indice == 1) {
-            this.funcionarioPrimeiro = null;
+        if ((this.funcionarioPrimeiro.getFuncionarioCelula()).getNome().equals(nomeBuscado)) {
+            this.funcionarioPrimeiro = this.funcionarioPrimeiro.getCelulaProximo();
             this.indice--;
+            return true;
         } else {
-            Celula celulaAtual = this.funcionarioPrimeiro;
-            Celula celulaAnterior = new Celula();
 
-            for (int i = 0; i <= this.indice; i++) {
+            Celula celulaAtual = this.funcionarioPrimeiro.getCelulaProximo();
 
-                if (celulaAtual.getFuncionarioCelula().getNome().equals(nomeBuscado)) {
-                    celulaAtual = celulaAtual.getCelulaProximo();
-                } else {
-                    celulaAnterior.setCelulaProximo(celulaAtual.getCelulaProximo());
-                    this.indice--;
+            for (int i = 1; i < this.indice; i++) {
+
+                if (i == this.indice - 1) {
+                    removeUltimo();
                     return true;
                 }
+
+                if (celulaAtual.getFuncionarioCelula().getNome().equals(nomeBuscado)) {
+                    celulaAtual.setFuncionarioCelula(celulaAtual.getCelulaProximo().getFuncionarioCelula());
+                    celulaAtual.setCelulaProximo(celulaAtual.getCelulaProximo().getCelulaProximo());
+                    this.indice--;
+                    return true;
+                } else {
+                    celulaAtual = celulaAtual.getCelulaProximo();
+                }
+
             }
+
         }
+
         return false;
     }
 
