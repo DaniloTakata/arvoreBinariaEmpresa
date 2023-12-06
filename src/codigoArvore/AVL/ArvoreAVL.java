@@ -6,6 +6,10 @@ public class ArvoreAVL {
 
     private NoAVL raiz;
 
+    public NoAVL getRaiz() {
+        return this.raiz;
+    }
+
     public boolean inserir(int chave, Departamento departamento) {
         if (this.raiz == null) {
             this.raiz = new NoAVL(chave, null, departamento);
@@ -64,9 +68,13 @@ public class ArvoreAVL {
         }
     }
 
-    public void remover(int chave) {
+    public int remover(int chave) {
         if (this.raiz == null)
-            return;
+            return 0;
+
+        if (chave == this.raiz.getChave()) {
+            return -1;
+        }
 
         NoAVL filho = this.raiz;
         while (filho != null) {
@@ -74,9 +82,10 @@ public class ArvoreAVL {
             filho = chave >= no.getChave() ? no.getDireita() : no.getEsquerda();
             if (chave == no.getChave()) {
                 removerRecursivo(no);
-                return;
+                return 1;
             }
         }
+        return -999;
     }
 
     public boolean buscar(int chave) {

@@ -17,8 +17,9 @@ public class Teste {
         System.out.println(arvoreAVL.buscar(5));
         System.out.println(arvoreAVL.buscarId(5).toString());
 
-        arvoreAVL.imprimeArvoreComoEstrutura();
 
+
+        arvoreAVL.imprimeArvoreComoEstrutura();
     }
 
 }

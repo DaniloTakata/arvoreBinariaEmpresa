@@ -26,7 +26,7 @@ public class Main {
                 "\nDigite o comando: ";
         int comando;
 
-        ArvoreAVL arvoreAVL = new ArvoreAVL();
+        ArvoreAVL arvoreAVL = new ArvoreAVL(); // 1
         arvoreAVL.inserir(0, new Departamento("CEO"));
         int idControle = 1;
 
@@ -79,10 +79,13 @@ public class Main {
                     System.out.print("\nDigite o id do Departamento à ser removido: ");
                     int depBuscado = sc.nextInt();
 
-                    NoAVL noAVLEncontrado = arvoreAVL.buscarId(depBuscado);
-                    if (noAVLEncontrado != null) {
-                        arvoreAVL.remover(noAVLEncontrado.getChave());
+                    int retorno = arvoreAVL.remover(depBuscado);
+                    if (retorno == 1) {
                         System.out.print("\nDepartamento excluído com sucesso!");
+                    } else if (retorno == -1) {
+                        System.out.print("\nNão é possível excluir o CEO!");
+                    } else if (retorno == 0) {
+                        System.out.print("\nNão existem Departamentos!");
                     } else {
                         System.out.print("\nDepartamento não encontrado!");
                     }
@@ -121,26 +124,24 @@ public class Main {
                     System.out.print("\nDigite o id do Departamento a ser buscado: ");
                     int depBuscado = sc.nextInt();
 
-                    NoAVL noAVLEncontrado = arvoreAVL.buscarId(depBuscado);
+                    ListaCelula funcionarios = null;
+                            NoAVL noAVLEncontrado = arvoreAVL.buscarId(depBuscado);
                     boolean retorno = false;
+
                     if (noAVLEncontrado != null) {
                         System.out.print("\nDepartamento encontrado! \n" + (noAVLEncontrado.getDepartamento())
                                 .toString());
-                        ListaCelula funcionarios = ((noAVLEncontrado.getDepartamento()).getGerente())
+                        funcionarios = ((noAVLEncontrado.getDepartamento()).getGerente())
                                 .getFuncionario();
 
                         System.out.print("\nDigite o nome do funcionário à ser excluído: ");
                         String nomefuncionario = sc.next();
-                        int busca = funcionarios.removePorNome(nomefuncionario);
 
-                        if (busca != -999) {
-                            funcionarios.removePosicao(busca);
-                            retorno = true;
-                        }
-
+                        retorno = funcionarios.removePorNome(nomefuncionario);
                     }
 
                     if (retorno) {
+                        ((noAVLEncontrado.getDepartamento()).getGerente()).setFuncionario(funcionarios);
                         System.out.println("\nFuncionário excluído com sucesso!");
                     } else {
                         System.out.println("\nFuncionário não encontrado!");

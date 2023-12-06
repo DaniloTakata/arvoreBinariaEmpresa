@@ -101,17 +101,27 @@ public class ListaCelula {
 
     }
 
-    public int removePorNome(String nomeBuscado) {
+    public boolean removePorNome(String nomeBuscado) {
 
-        Celula celulaAtual = this.funcionarioPrimeiro;
-        for (int i = 0; i < this.indice; i++) {
+        if (this.indice == 1) {
+            this.funcionarioPrimeiro = null;
+            this.indice--;
+        } else {
+            Celula celulaAtual = this.funcionarioPrimeiro;
+            Celula celulaAnterior = new Celula();
 
-            if ((celulaAtual.getFuncionarioCelula().getNome()).equals(nomeBuscado)) {
-                return i;
+            for (int i = 0; i <= this.indice; i++) {
+
+                if (celulaAtual.getFuncionarioCelula().getNome().equals(nomeBuscado)) {
+                    celulaAtual = celulaAtual.getCelulaProximo();
+                } else {
+                    celulaAnterior.setCelulaProximo(celulaAtual.getCelulaProximo());
+                    this.indice--;
+                    return true;
+                }
             }
-
         }
-        return -999;
+        return false;
     }
 
     public Funcionario buscaNome(String nomeBuscado) {
@@ -151,8 +161,5 @@ public class ListaCelula {
         return retorno;
     }
 
-    public int qtdFuncionario() {
-        return this.indice;
-    }
-
 }
+
