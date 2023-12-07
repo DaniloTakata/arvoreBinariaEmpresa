@@ -59,33 +59,39 @@ public class ArvoreAVL {
             NoAVL filho = no.getEsquerda();
             while (filho.getDireita() != null) filho = filho.getDireita();
             no.setChave(filho.getChave());
+            no.setDepartamento(filho.getDepartamento());
             removerRecursivo(filho);
         } else {
             NoAVL filho = no.getDireita();
             while (filho.getEsquerda() != null) filho = filho.getEsquerda();
             no.setChave(filho.getChave());
+            no.setDepartamento(filho.getDepartamento());
             removerRecursivo(filho);
         }
     }
 
-    public int remover(int chave) {
-        if (this.raiz == null)
-            return 0;
+    public void remover(int chave) {
+        if (this.raiz == null) {
+            System.out.println("\nDepartamento não encontrado!!");
+            return;
+        }
 
-        if (chave == this.raiz.getChave()) {
-            return -1;
+        if (this.raiz.getChave() == chave) {
+            System.out.println("\nNão é possível excluir o CEO!!");
+            return;
         }
 
         NoAVL filho = this.raiz;
         while (filho != null) {
             NoAVL no = filho;
+
             filho = chave >= no.getChave() ? no.getDireita() : no.getEsquerda();
             if (chave == no.getChave()) {
                 removerRecursivo(no);
-                return 1;
+                System.out.println("\nDepartamento excluído com sucesso!");
+                return;
             }
         }
-        return -999;
     }
 
     public boolean buscar(int chave) {

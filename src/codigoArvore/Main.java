@@ -79,16 +79,18 @@ public class Main {
                     System.out.print("\nDigite o id do Departamento à ser removido: ");
                     int depBuscado = sc.nextInt();
 
-                    int retorno = arvoreAVL.remover(depBuscado);
-                    if (retorno == 1) {
-                        System.out.print("\nDepartamento excluído com sucesso!");
-                    } else if (retorno == -1) {
-                        System.out.print("\nNão é possível excluir o CEO!");
-                    } else if (retorno == 0) {
-                        System.out.print("\nNão existem Departamentos!");
-                    } else {
-                        System.out.print("\nDepartamento não encontrado!");
-                    }
+//                    int retorno = arvoreAVL.remover(depBuscado);
+//                    if (retorno == 1) {
+//                        System.out.print("\nDepartamento excluído com sucesso!");
+//                    } else if (retorno == -1) {
+//                        System.out.print("\nNão é possível excluir o CEO!");
+//                    } else if (retorno == 0) {
+//                        System.out.print("\nNão existem Departamentos!");
+//                    } else {
+//                        System.out.print("\nDepartamento não encontrado!");
+//                    }
+
+                    arvoreAVL.remover(depBuscado);
 
                     break;
                 } case 4 -> {
