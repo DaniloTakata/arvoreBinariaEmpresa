@@ -92,6 +92,7 @@ public class ArvoreAVL {
                 return;
             }
         }
+        System.out.println("\nDepartamento não encontrado!");
     }
 
     public boolean buscar(int chave) {

@@ -8,7 +8,9 @@ import codigoArvore.classes.Gerente;
 import codigoArvore.lista.Celula;
 import codigoArvore.lista.ListaCelula;
 
+import java.sql.Timestamp;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class Main {
     public static void main(String [] args) {
@@ -56,7 +58,11 @@ public class Main {
                     Gerente gerente = new Gerente(nomeGerente);
                     gerente.setFuncionario(funcionarios);
 
+                    Timestamp tempoAntesInsercao = new Timestamp(System.currentTimeMillis());
                     arvoreAVL.inserir(idControle, new Departamento(nomeDepartamento, gerente));
+                    Logger.getLogger("TEMPO").info("\nTempo na inserção(ms): " +
+                            (new Timestamp(System.currentTimeMillis()).getTime() - tempoAntesInsercao.getTime()));
+
                     idControle++;
 
                     System.out.print("\nInserido com sucesso!");
@@ -66,7 +72,11 @@ public class Main {
                     System.out.print("\nDigite o id do Departamento a ser buscado: ");
                     int depBuscado = sc.nextInt();
 
+                    Timestamp tempoAntesBusca = new Timestamp(System.currentTimeMillis());
                     NoAVL noAVLEncontrado = arvoreAVL.buscarId(depBuscado);
+                    Logger.getLogger("TEMPO").info("\nTempo na busca(ms): " +
+                            (new Timestamp(System.currentTimeMillis()).getTime() - tempoAntesBusca.getTime()));
+
                     if (noAVLEncontrado != null) {
                         System.out.print("\nDepartamento encontrado! \n" + (noAVLEncontrado.getDepartamento())
                                 .toString());
@@ -79,18 +89,10 @@ public class Main {
                     System.out.print("\nDigite o id do Departamento à ser removido: ");
                     int depBuscado = sc.nextInt();
 
-//                    int retorno = arvoreAVL.remover(depBuscado);
-//                    if (retorno == 1) {
-//                        System.out.print("\nDepartamento excluído com sucesso!");
-//                    } else if (retorno == -1) {
-//                        System.out.print("\nNão é possível excluir o CEO!");
-//                    } else if (retorno == 0) {
-//                        System.out.print("\nNão existem Departamentos!");
-//                    } else {
-//                        System.out.print("\nDepartamento não encontrado!");
-//                    }
-
+                    Timestamp tempoAntesDelecao = new Timestamp(System.currentTimeMillis());
                     arvoreAVL.remover(depBuscado);
+                    Logger.getLogger("TEMPO").info("\nTempo na deleção(ms): " +
+                            (new Timestamp(System.currentTimeMillis()).getTime() - tempoAntesDelecao.getTime()));
 
                     break;
                 } case 4 -> {
@@ -112,7 +114,10 @@ public class Main {
                             System.out.print("\nDigite o cargo do funcionário: ");
                             String cargoFun = sc.next();
 
+                            Timestamp tempoAntesInsercaoFun = new Timestamp(System.currentTimeMillis());
                             funcionarios.insereCelula(new Celula(new Funcionario(nomeFun, cargoFun)));
+                            Logger.getLogger("TEMPO").info("\nTempo na inserção Funcionário(ms): " +
+                                    (new Timestamp(System.currentTimeMillis()).getTime() - tempoAntesInsercaoFun.getTime()));
                             cont++;
                         }
 
@@ -139,7 +144,10 @@ public class Main {
                         System.out.print("\nDigite o nome do funcionário à ser excluído: ");
                         String nomefuncionario = sc.next();
 
+                        Timestamp tempoAntesRemocaoFun = new Timestamp(System.currentTimeMillis());
                         retorno = funcionarios.removePorNome(nomefuncionario);
+                        Logger.getLogger("TEMPO").info("\nTempo na remoção Funcionário(ms): " +
+                                (new Timestamp(System.currentTimeMillis()).getTime() - tempoAntesRemocaoFun.getTime()));
                     }
 
                     if (retorno) {
@@ -159,7 +167,11 @@ public class Main {
                         System.out.print("\nDigite o novo nome do Gerente: ");
                         String nomeGerente = sc.next();
 
+                        Timestamp tempoAntesAtualizaGerente = new Timestamp(System.currentTimeMillis());
                         ((noAVLEncontrado.getDepartamento()).getGerente()).setNome(nomeGerente);
+                        Logger.getLogger("TEMPO").info("\nTempo na atualização do gerente(ms): " +
+                                (new Timestamp(System.currentTimeMillis()).getTime() - tempoAntesAtualizaGerente.getTime()));
+
                         System.out.print("\nGerente atualizado com sucesso! " +
                                 ((noAVLEncontrado.getDepartamento()).getGerente()));
                     } else {
@@ -169,7 +181,11 @@ public class Main {
                     break;
                 } case 7 -> {
                     System.out.println();
+
+                    Timestamp tempoAntesImprimiArvore = new Timestamp(System.currentTimeMillis());
                     arvoreAVL.imprimeArvoreComoEstrutura();
+                    Logger.getLogger("TEMPO").info("\nTempo na imprime árvore(ms): " +
+                            (new Timestamp(System.currentTimeMillis()).getTime() - tempoAntesImprimiArvore.getTime()));
                     break;
                 }
 
