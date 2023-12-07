@@ -60,8 +60,10 @@ public class Main {
 
                     Timestamp tempoAntesInsercao = new Timestamp(System.currentTimeMillis());
                     arvoreAVL.inserir(idControle, new Departamento(nomeDepartamento, gerente));
-                    Logger.getLogger("TEMPO").info("\nTempo na inserção(ms): " +
+                    System.out.print("\nTempo na inserção(ms): " +
                             (new Timestamp(System.currentTimeMillis()).getTime() - tempoAntesInsercao.getTime()));
+//                    Logger.getLogger("TEMPO").info("\nTempo na inserção(ms): " +
+//                            (new Timestamp(System.currentTimeMillis()).getTime() - tempoAntesInsercao.getTime()));
 
                     idControle++;
 
@@ -74,8 +76,10 @@ public class Main {
 
                     Timestamp tempoAntesBusca = new Timestamp(System.currentTimeMillis());
                     NoAVL noAVLEncontrado = arvoreAVL.buscarId(depBuscado);
-                    Logger.getLogger("TEMPO").info("\nTempo na busca(ms): " +
+                    System.out.print("\nTempo na busca(ms): " +
                             (new Timestamp(System.currentTimeMillis()).getTime() - tempoAntesBusca.getTime()));
+//                    Logger.getLogger("TEMPO").info("\nTempo na busca(ms): " +
+//                            (new Timestamp(System.currentTimeMillis()).getTime() - tempoAntesBusca.getTime()));
 
                     if (noAVLEncontrado != null) {
                         System.out.print("\nDepartamento encontrado! \n" + (noAVLEncontrado.getDepartamento())
@@ -91,8 +95,10 @@ public class Main {
 
                     Timestamp tempoAntesDelecao = new Timestamp(System.currentTimeMillis());
                     arvoreAVL.remover(depBuscado);
-                    Logger.getLogger("TEMPO").info("\nTempo na deleção(ms): " +
+                    System.out.print("\nTempo na deleção(ms): " +
                             (new Timestamp(System.currentTimeMillis()).getTime() - tempoAntesDelecao.getTime()));
+//                    Logger.getLogger("TEMPO").info("\nTempo na deleção(ms): " +
+//                            (new Timestamp(System.currentTimeMillis()).getTime() - tempoAntesDelecao.getTime()));
 
                     break;
                 } case 4 -> {
@@ -116,8 +122,10 @@ public class Main {
 
                             Timestamp tempoAntesInsercaoFun = new Timestamp(System.currentTimeMillis());
                             funcionarios.insereCelula(new Celula(new Funcionario(nomeFun, cargoFun)));
-                            Logger.getLogger("TEMPO").info("\nTempo na inserção Funcionário(ms): " +
+                            System.out.print("\nTempo na inserção Funcionário(ms): " +
                                     (new Timestamp(System.currentTimeMillis()).getTime() - tempoAntesInsercaoFun.getTime()));
+//                            Logger.getLogger("TEMPO").info("\nTempo na inserção Funcionário(ms): " +
+//                                    (new Timestamp(System.currentTimeMillis()).getTime() - tempoAntesInsercaoFun.getTime()));
                             cont++;
                         }
 
@@ -146,8 +154,10 @@ public class Main {
 
                         Timestamp tempoAntesRemocaoFun = new Timestamp(System.currentTimeMillis());
                         retorno = funcionarios.removePorNome(nomefuncionario);
-                        Logger.getLogger("TEMPO").info("\nTempo na remoção Funcionário(ms): " +
+                        System.out.print("\nTempo na remoção Funcionário(ms): " +
                                 (new Timestamp(System.currentTimeMillis()).getTime() - tempoAntesRemocaoFun.getTime()));
+//                        Logger.getLogger("TEMPO").info("\nTempo na remoção Funcionário(ms): " +
+//                                (new Timestamp(System.currentTimeMillis()).getTime() - tempoAntesRemocaoFun.getTime()));
                     }
 
                     if (retorno) {
@@ -169,8 +179,10 @@ public class Main {
 
                         Timestamp tempoAntesAtualizaGerente = new Timestamp(System.currentTimeMillis());
                         ((noAVLEncontrado.getDepartamento()).getGerente()).setNome(nomeGerente);
-                        Logger.getLogger("TEMPO").info("\nTempo na atualização do gerente(ms): " +
+                        System.out.print("\nTempo na atualização do gerente(ms): " +
                                 (new Timestamp(System.currentTimeMillis()).getTime() - tempoAntesAtualizaGerente.getTime()));
+//                        Logger.getLogger("TEMPO").info("\nTempo na atualização do gerente(ms): " +
+//                                (new Timestamp(System.currentTimeMillis()).getTime() - tempoAntesAtualizaGerente.getTime()));
 
                         System.out.print("\nGerente atualizado com sucesso! " +
                                 ((noAVLEncontrado.getDepartamento()).getGerente()));
@@ -184,8 +196,10 @@ public class Main {
 
                     Timestamp tempoAntesImprimiArvore = new Timestamp(System.currentTimeMillis());
                     arvoreAVL.imprimeArvoreComoEstrutura();
-                    Logger.getLogger("TEMPO").info("\nTempo na imprime árvore(ms): " +
+                    System.out.print("\nTempo na imprime árvore(ms): " +
                             (new Timestamp(System.currentTimeMillis()).getTime() - tempoAntesImprimiArvore.getTime()));
+//                    Logger.getLogger("TEMPO").info("\nTempo na imprime árvore(ms): " +
+//                            (new Timestamp(System.currentTimeMillis()).getTime() - tempoAntesImprimiArvore.getTime()));
                     break;
                 }
 
